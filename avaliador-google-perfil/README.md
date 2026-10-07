@@ -1,15 +1,20 @@
 # Perfil em Foco
 
-Avaliador rápido de Perfil da Empresa no Google, em português. Funciona como página estática: o usuário informa os dados públicos que vê no Google Maps, recebe uma pontuação orientativa e sugestões para melhorar o perfil.
+Avaliador do Perfil da Empresa no Google. Digite o nome ou cole um link do Maps; a aplicação consulta a Places API (New), exibe até cinco resultados e preenche automaticamente os dados públicos disponíveis. Se houver resultados parecidos, escolha o negócio correto antes de avaliar.
 
-## Executar localmente
+## Configuração na Vercel
 
-Abra `index.html` no navegador. Não requer instalação, chave de API ou coleta de dados.
+1. No Google Cloud Console, escolha/crie um projeto, ative o faturamento e habilite **Places API (New)**.
+2. Crie uma chave de API restrita à Places API (New). Não coloque a chave no HTML nem no GitHub.
+3. Na Vercel, abra **Project → Settings → Environment Variables** e adicione `GOOGLE_MAPS_API_KEY` para Production. Restrinja a chave também no Google Cloud e defina cotas/alertas.
+4. Faça um novo deploy para a função `/api/search` receber a variável.
 
-## Publicar na Vercel
+A busca solicita rating, quantidade de avaliações, telefone, site, horários, categoria, endereço e presença de fotos. O Google exige faturamento ativado e cobra conforme produto, campos e volume. Confira as cotas e preços atuais no Google Cloud.
 
-Importe este repositório como projeto estático. Não há comando de build; o arquivo de entrada é `index.html`.
+## Limites dos dados
 
-## Limites
+A API pública não fornece a taxa de resposta do proprietário, publicações recentes nem a descrição completa dos serviços. Esses itens ficam para conferência manual. O app não grava os resultados pesquisados. Termos e privacidade estão em `terms.html` e `privacy.html`.
 
-O avaliador não acessa nem raspa dados do Google automaticamente. A nota é um checklist orientativo, não uma fórmula oficial de posicionamento do Google.
+## Desenvolvimento local
+
+Abra `index.html` para visualizar a interface. A função de busca requer `GOOGLE_MAPS_API_KEY` configurada no ambiente Vercel.
